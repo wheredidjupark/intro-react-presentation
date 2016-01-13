@@ -10,8 +10,59 @@
 
 <body>
     <div id="example"></div>
-    <script type="text/babel">
 
+    <script type="text/babel">
+    //JSX => JS
+    	// var HelloWorld = React.createClass(
+    	// {
+    	// 	render: function(){
+
+    	// 	return (
+    	// 		<div>Hello {this.props.name}.</div>
+    	// 		);	
+    	// 	}
+    	// });
+
+    	// ReactDOM.render(<div>
+    	// 					<HelloWorld name="Jason"></HelloWorld>
+    	// 				</div>
+    	// 				, document.getElementById('example'));
+
+
+	var Button = React.createClass({
+		render: function(){
+			return (<button onClick={this.doClick}>+{this.props.value}</button>);
+		},
+		doClick: function(){
+
+			this.props.handler(this.props.value);
+		}
+
+	});
+
+	var Main = React.createClass({
+		getInitialState: function(){
+			return {counter: 0};
+		},
+		//handleClick is not a predefined property in React. We make up our own
+		handleClick: function(value){
+			this.setState({counter: this.state.counter+value});
+		},
+		render: function(){
+
+			return (
+				<div>
+					<Button handler ={this.handleClick} value={1} ></Button>
+					<Button handler = {this.handleClick} value={5}></Button>
+					<Button handler= {this.handleClick} value={10}></Button>
+					<Button handler= {this.handleClick} value={50}></Button>
+					<div>{this.state.counter}</div>
+				</div>
+				);
+		}
+	});
+
+	ReactDOM.render(<Main />, document.getElementById('example'));
     </script>
 </body>
 
